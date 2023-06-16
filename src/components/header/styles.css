@@ -1,0 +1,121 @@
+.header {
+    background-color: #171123;
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.6);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 60px;
+}
+
+.logo {
+    display: inline-block;
+    color: #7D82B8;
+    font-size: 2rem;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.hamburger {
+    cursor: pointer;
+    float: right;
+    padding: 30px 20px;
+}
+
+.hamburger-item {
+    background-color: #7d82b8;
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 25px;
+}
+
+.hamburger-item::before,
+.hamburger-item::after {
+    background: #7d82b8;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transform: all .2s ease-out;
+    width: 100%;
+}
+
+.hamburger-item::before {
+    top: 5px;
+}
+
+.hamburger-item::after {
+    top: -5px;
+}
+
+.navbar {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #372248;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .5s ease-out;
+}
+
+.menu a {
+    display: block;
+    padding: 25px;
+    color: #dad1e1;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu a:hover {
+    background-color: #7d82b8;
+    color: #bbdbb4;
+}
+
+.side-menu {
+    display: none;
+}
+
+.side-menu:checked~nav {
+    max-height: 100%;
+}
+
+.side-menu:checked~.hamburger {
+    background: transparent;
+}
+
+.side-menu:checked~.hamburger .hamburger-item {
+    background: transparent;
+}
+
+.side-menu:checked~.hamburger .hamburger-item:before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.side-menu:checked~.hamburger .hamburger-item::after {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        max-height: none;
+        top: 0;
+        position: relative;
+        float: right;
+        width: fit-content;
+        background-color: transparent;
+    }
+
+    .menu li {
+        float: left;
+    }
+
+    .menu a:hover {
+        background: transparent;
+        color: #bbdbb4;
+    }
+
+    .hamburger {
+        display: none;
+    }
+}
