@@ -1,0 +1,37 @@
+.menu a {
+    display: block;
+    padding: 25px;
+    color: #dad1e1;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu a:hover {
+    background-color: #7d82b8;
+    color: #bbdbb4;
+}
+
+.side-menu {
+    display: none;
+}
+
+.side-menu:checked~nav {
+    max-height: 40%;
+}
+
+.side-menu:checked~.hamburger {
+    background: transparent;
+}
+
+.side-menu:checked~.hamburger .hamburger-item {
+    background: transparent;
+}
+
+.side-menu:checked~.hamburger .hamburger-item:before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.side-menu:checked~.hamburger .hamburger-item::after {
+    transform: rotate(45deg);
+    top: 0;
+}

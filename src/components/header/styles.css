@@ -13,6 +13,7 @@
     font-size: 2rem;
     margin: 10px;
     font-weight: bold;
+    font-family: 'Bagel Fat One', cursive;
 }
 
 .hamburger {
@@ -56,44 +57,6 @@
     overflow: hidden;
     max-height: 0;
     transition: max-height .5s ease-out;
-}
-
-.menu a {
-    display: block;
-    padding: 25px;
-    color: #dad1e1;
-    transition: all 0.3s ease-in-out;
-}
-
-.menu a:hover {
-    background-color: #7d82b8;
-    color: #bbdbb4;
-}
-
-.side-menu {
-    display: none;
-}
-
-.side-menu:checked~nav {
-    max-height: 100%;
-}
-
-.side-menu:checked~.hamburger {
-    background: transparent;
-}
-
-.side-menu:checked~.hamburger .hamburger-item {
-    background: transparent;
-}
-
-.side-menu:checked~.hamburger .hamburger-item:before {
-    transform: rotate(-45deg);
-    top: 0;
-}
-
-.side-menu:checked~.hamburger .hamburger-item::after {
-    transform: rotate(45deg);
-    top: 0;
 }
 
 @media (min-width: 768px) {
