@@ -1,42 +1,64 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/header'
-import ItemListContainer from './components/itemlistcontainer/itemlistcontainer'
-import Counter from './components/counter/counter'
-import Input from './components/input/input'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Header from './components/header';
+import ItemListContainer from './components/itemlistcontainer/itemlistcontainer';
+import Counter from './components/counter/counter';
+import Input from './components/input/input';
+import Card from './components/products/card/card';
 
 function App() {
-	const [counter, setCounter] = useState(0)
-	const [task, setTask] = useState('')
-	const [active, setActive] = useState(false)
+	const [counter, setCounter] = useState(0);
+	const [task, setTask] = useState('');
+	const [active, setActive] = useState(false);
+	const [products, setProducts] = useState([]);
 
-	const isValidCounter = counter > 0
+	const isValidCounter = counter > 0;
 
 	const incrementCounter = () => {
-		setCounter((prevCounter) => prevCounter + 1)
-	}
+		setCounter((prevCounter) => prevCounter + 1);
+	};
 
 	const decrementCounter = () => {
-		if (!isValidCounter) return
-		setCounter((prevCounter) => prevCounter - 1)
-	}
+		if (!isValidCounter) return;
+		setCounter((prevCounter) => prevCounter - 1);
+	};
 
-	const setTast = () => {}
+	const setTast = () => {};
 
 	const onChange = (event) => {
-		const value = event.target.value
-		setTast(value)
-	}
+		const value = event.target.value;
+		setTast(value);
+	};
 
 	const onFocus = () => {
-		setActive(true)
-	}
+		setActive(true);
+	};
 
 	const onBlur = () => {
-		setActive(false)
-	}
+		setActive(false);
+	};
 
-	const inputClass = `container ${active ? 'active' : ''}`
+	const inputClass = `container ${active ? 'active' : ''}`;
+
+	useEffect(() => {
+		const getProducts = async () => {
+			try {
+				const response = await fetch('https://649a5d87bf7c145d0238c38f.mockapi.io/project-coderhouse', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
+				const data = await response.json();
+				setProducts(data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		getProducts();
+	}, []);
+
+	// console.log({ products });
 
 	return (
 		<>
@@ -67,10 +89,16 @@ function App() {
 					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
+					active={active}
 				/>
 			</div>
+			<div className="cardContainer">
+				{products.map((products) => (
+					<Card {...products} />
+				))}
+			</div>
 		</>
-	)
+	);
 }
 
-export default App
+export default App;

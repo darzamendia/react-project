@@ -1,0 +1,65 @@
+.card {
+    background-color: beige;
+    border-radius: 4px;
+    box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 1rem;
+    max-width: 400px;
+}
+
+.cardImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardName {
+    font-size: 1.2rem;
+}
+
+.cardCategory {
+    font-size: 0.8rem;
+    color: green;
+    font-weight: bold;
+}
+
+.cardDescription {
+    font-size: 0.9rem;
+}
+
+.cardPrice {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: palevioletred
+}
+
+.cardStock {
+    font-size: 0.8rem;
+    padding: 0.3rem 0;
+}
+
+.cardActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.cardButton {
+    border: none;
+    color: lavender;
+    background-color: darkslategray;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    padding: 1rem 2rem;
+}
