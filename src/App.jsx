@@ -4,7 +4,8 @@ import Header from './components/header';
 import ItemListContainer from './components/itemlistcontainer/itemlistcontainer';
 import Counter from './components/counter/counter';
 import Input from './components/input/input';
-import Card from './components/products/card/card';
+import ItemCard from './components/products/cards/itemCard';
+import ContainerTitle from './components/containerTitle/containerTitle';
 
 function App() {
 	const [counter, setCounter] = useState(0);
@@ -58,44 +59,32 @@ function App() {
 		getProducts();
 	}, []);
 
-	// console.log({ products });
-
 	return (
 		<>
 			<Header logo="Keeb me!" />
-			<ItemListContainer
-				itemTitleOne="SP-Star Meteor White"
-				itemPriceOne="231"
-				itemStockOne="100"
-				itemTitleTwo="Novelkeys Cream Linear"
-				itemPriceTwo="247"
-				itemStockTwo="50"
-				itemTitleThree="C³Equalz X TKC Tangerine"
-				itemPriceThree="260"
-				itemStockThree="25"
-			/>
-			<Counter
+			{/* <Counter
 				counter={counter}
 				onDecrementCounter={decrementCounter}
 				onIncrementCounter={incrementCounter}
 				isValidCounter={isValidCounter}
-			/>
-			<div style={{ width: '50%', padding: '10px' }}>
+			/> */}
+			<div className="mainContainer">
 				<Input
 					cntClassName={inputClass}
-					placeholder="Ingrese su nombre completo..."
-					labelName="Nombre completo"
+					placeholder="Buscar producto..."
+					labelName="Producto"
 					id="fullName"
 					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					active={active}
 				/>
-			</div>
-			<div className="cardContainer">
-				{products.map((products) => (
-					<Card {...products} />
-				))}
+				<ContainerTitle title="Productos" />
+				<div className="itemContainer">
+					{products.map((products) => (
+						<ItemCard {...products} />
+					))}
+				</div>
 			</div>
 		</>
 	);

@@ -1,65 +1,75 @@
-.card {
-    background-color: beige;
+.itemCard {
+    background-color: #c8b8db;
     border-radius: 4px;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: 0.5rem;
     padding: 1rem;
     max-width: 400px;
+    height: 450px;
 }
 
-.cardImage {
+.itemCardImage {
     width: 200px;
     height: 200px;
     object-fit: cover;
 }
 
-.cardContent {
+.itemCardContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: .3rem;
 }
 
-.cardName {
+.itemCardName {
     font-size: 1.2rem;
+    padding-top: .5rem;
+    /* width: 300px; */
+    /* justify-content: center; */
 }
 
-.cardCategory {
-    font-size: 0.8rem;
-    color: green;
+.itemCardCategory {
+    font-size: 1rem;
+    /* padding: .1rem 0; */
+    color: #502f4c;
     font-weight: bold;
 }
 
-.cardDescription {
+.itemCardDescription {
     font-size: 0.9rem;
+    min-height: 4rem;
+    max-width: 300px;
+    text-align: center;
 }
 
-.cardPrice {
+.itemCardPrice {
     font-size: 1.1rem;
     font-weight: bold;
-    color: palevioletred
+    color: #502f4c;
 }
 
-.cardStock {
+.itemCardStock {
     font-size: 0.8rem;
     padding: 0.3rem 0;
 }
 
-.cardActions {
+.itemCardActions {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: .5rem;
 }
 
-.cardButton {
+.itemCardButton {
     border: none;
-    color: lavender;
-    background-color: darkslategray;
+    color: #f9f4f5;
+    background-color: #502f4c;
     font-size: 0.8rem;
     border-radius: 4px;
-    padding: 1rem 2rem;
+    padding: .5rem 1.5rem;
 }
