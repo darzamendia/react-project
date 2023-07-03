@@ -1,4 +1,4 @@
-import './input.css'
+import './input.css';
 
 const Input = ({
 	id,
@@ -26,7 +26,7 @@ const Input = ({
 			/>
 			<label htmlFor={id}>{labelName}</label>
 		</div>
-	)
-}
+	);
+};
 
-export default Input
+export default Input;

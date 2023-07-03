@@ -1,77 +1,81 @@
-.itemCard {
+.itemDetailCard {
     background-color: #c8b8db;
     border-radius: 4px;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     margin: 0.5rem;
     padding: 1rem;
-    /* max-width: 500px; */
+    min-width: 1000px;
+    max-width: 90%;
     height: 400px;
     transition: all 0.3s ease-in-out;
 }
 
-.itemCard:hover {
+/* .itemDetailCard:hover {
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.6);
     scale: 1.02;
-}
+} */
 
-.itemCardImage {
-    width: 200px;
-    height: 200px;
+.itemDetailCardImage {
+    width: 350px;
+    height: 350px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-.itemCardContent {
+.itemDetailCardContent {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: .3rem;
+    justify-content: space-around;
+    /* background-color: red; */
+    height: 70%;
+    /* align-items: center; */
+    /* gap: .3rem; */
 }
 
-.itemCardName {
+.itemDetailCardName {
     font-size: 1.2rem;
     padding-top: .5rem;
     /* width: 300px; */
     /* justify-content: center; */
 }
 
-.itemCardCategory {
+.itemDetailCardCategory {
     font-size: 1rem;
     /* padding: .1rem 0; */
     color: #502f4c;
     font-weight: bold;
 }
 
-.itemCardDescription {
+.itemDetailCardDescription {
     font-size: 0.9rem;
     min-height: 4rem;
     max-width: 300px;
-    text-align: center;
+    /* text-align: center; */
 }
 
-.itemCardPrice {
+.itemDetailCardPrice {
     font-size: 1.1rem;
     font-weight: bold;
     color: #502f4c;
 }
 
-.itemCardStock {
+.itemDetailCardStock {
     font-size: 0.8rem;
     padding: 0.3rem 0;
 }
 
-.itemCardActions {
+.itemDetailCardActions {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: .5rem;
 }
 
-.itemCardButton {
+.itemDetailCardButton {
     border: none;
     color: #f9f4f5;
     background-color: #502f4c;
