@@ -6,7 +6,7 @@ function App() {
 	return (
 		<div>
 			<Routes>
-				<Route path='/react-project/' element={<Home />} />
+				<Route path='/' element={<Home />} />
 			</Routes>
 		</div>
 	);
