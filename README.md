@@ -13,4 +13,4 @@ En esta oportunidad, se implementa:
 
 ## Deploy de proyecto 🔌🚀
 
-**En el siguiente link podrás ver el resultado al momento:** [Link a la demo](https://darzamendia.github.io/). 🚀
+**En el siguiente link podrás ver el resultado al momento:** [Link a la demo](https://darzamendia.github.io/react-project/). 🚀

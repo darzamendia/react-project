@@ -3,6 +3,7 @@
     padding: 25px;
     color: #dad1e1;
     transition: all 0.3s ease-in-out;
+    z-index: 2;
 }
 
 .menu a:hover {
