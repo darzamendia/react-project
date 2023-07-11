@@ -16,7 +16,7 @@ const ItemListContainer = ({
 }) => {
 	return (
 		<main>
-			<div class='container'>
+			<div className='container'>
 				<Item itemTitle={itemTitleOne} itemPrice={itemPriceOne} itemStock={itemStockOne} />
 				<Item itemTitle={itemTitleTwo} itemPrice={itemPriceTwo} itemStock={itemStockTwo} />
 				<Item itemTitle={itemTitleThree} itemPrice={itemPriceThree} itemStock={itemStockThree} />

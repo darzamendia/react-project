@@ -4,7 +4,7 @@ export const ROOT_URL = '/react-project/';
 
 export const API_URL = {
 	PRODUCTS: {
-		url: `${BASE_URL}/project-coderhouse`,
+		url: `${BASE_URL}/items`,
 		config: {
 			method: 'GET',
 			headers: {

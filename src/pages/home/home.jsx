@@ -41,9 +41,9 @@ function Home() {
 	};
 
 	const onShowItemDetail = (id) => {
-		setShowItemDetail(true);
-		const itemFound = products.find((products) => products.id === id);
-		setItemDetail(itemFound);
+		// setShowItemDetail(true);
+		// const itemFound = products.find((products) => products.id === id);
+		// setItemDetail(itemFound);
 	};
 
 	const inputClass = `container ${active ? 'active' : ''}`;
@@ -52,15 +52,14 @@ function Home() {
 
 	return (
 		<>
-			<Header logo='Keeb me!' />
 			<div className='mainContainer'>
 				{showItemDetail ? (
 					<>
-						<button onClick={() => setShowItemDetail(false)}>Back</button>
+						{/* <button onClick={() => setShowItemDetail(false)}>Back</button>
 						<ContainerTitle title='Detalle del producto' />
 						<div className='itemContainer'>
 							<ItemDetailCard {...itemDetail} />
-						</div>
+						</div> */}
 					</>
 				) : (
 					<>

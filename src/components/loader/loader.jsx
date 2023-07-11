@@ -5,8 +5,8 @@ const Loader = () => {
 		<>
 			<div className='spinner-container'>
 				<div className='loader-spinner'></div>
+				<p>Loading data, please wait...</p>
 			</div>
-			<p>Loading data, please wait...</p>
 		</>
 	);
 };
