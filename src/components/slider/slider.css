@@ -1,0 +1,42 @@
+.slider {
+    overflow: hidden;
+    position: relative;
+}
+.sliderContent{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* justify-content: center; */
+    /* align-items: center ; */
+}
+
+.previousBtn,
+.nextBtn {
+    border: none;
+    background-color: aqua;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    
+}
+
+.previousBtn{
+    left: 0;
+}
+
+.nextBtn {
+    right: 0;
+}
+
+.previousBtn span,
+.nextBtn span {
+    font: 1.5rem;
+
+}

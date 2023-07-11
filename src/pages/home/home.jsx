@@ -1,25 +1,28 @@
 import { useState } from 'react';
-import './home.css';
-import Header from '../../components/header/header';
-import Input from '../../components/input/input';
-import ItemCard from '../../components/products/cards/itemCard';
-import ContainerTitle from '../../components/containerTitle/containerTitle';
-import ItemDetailCard from '../../components/itemdetailcontainer/itemDetailContainer';
-import Loader from '../../components/loader/loader';
+import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
+import { TEMP_URL } from '../../constants/constants';
+import Input from '../../components/input/input';
+import ItemCard from '../../components/items/cards/itemCard';
+import ContainerTitle from '../../components/containerTitle/containerTitle';
+import Loader from '../../components/loader/loader';
+import Slider from '../../components/slider/slider';
+import './home.css';
 
 function Home() {
+	const navigate = useNavigate();
 	const [search, setSearch] = useState('');
 	const [active, setActive] = useState(false);
-	const [showItemDetail, setShowItemDetail] = useState(false);
-	const [itemDetail, setItemDetail] = useState(null);
+	// const [showItemDetail, setShowItemDetail] = useState(false);
+	// const [itemDetail, setItemDetail] = useState(null);
 	const [productsFiltered, setProductsFiltered] = useState([]);
 
-	const { data: products, loading, error } = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
+	const { data: items, loading: loadingItems, error: errorItems } = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
+	const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(TEMP_URL.CATEGORIES.url, TEMP_URL.CATEGORIES.config);
 
 	const filterBySearch = (query) => {
-		let updateProductList = [...products];
+		let updateProductList = [...items];
 		updateProductList = updateProductList.filter((item) => {
 			return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
 		});
@@ -41,53 +44,50 @@ function Home() {
 	};
 
 	const onShowItemDetail = (id) => {
-		// setShowItemDetail(true);
-		// const itemFound = products.find((products) => products.id === id);
-		// setItemDetail(itemFound);
+		navigate(`/react-project/item/${id}`)
 	};
 
 	const inputClass = `container ${active ? 'active' : ''}`;
 
-	// console.log({ loading, error, products });
-
 	return (
 		<>
 			<div className='mainContainer'>
-				{showItemDetail ? (
-					<>
-						{/* <button onClick={() => setShowItemDetail(false)}>Back</button>
-						<ContainerTitle title='Detalle del producto' />
-						<div className='itemContainer'>
-							<ItemDetailCard {...itemDetail} />
-						</div> */}
-					</>
-				) : (
-					<>
-						<Input
-							cntClassName={inputClass}
-							placeholder='Buscar producto...'
-							labelName='Producto'
-							id='fullName'
-							onChange={onChange}
-							onFocus={onFocus}
-							onBlur={onBlur}
-							active={active}
-						/>
-						<ContainerTitle title='Productos' />
-						<div className='itemContainer'>
-							{loading && <Loader />}
-							{error && <h3>{error}</h3>}
-							{search.length > 0 && productsFiltered.length === 0 && <h2>Not found</h2>}
-							{search.length > 0
-								? productsFiltered.map((products) => (
-										<ItemCard key={products.id} {...products} onShowItemDetail={onShowItemDetail} />
-								  ))
-								: products.map((products) => (
-										<ItemCard key={products.id} {...products} onShowItemDetail={onShowItemDetail} />
-								  ))}
-						</div>
-					</>
-				)}
+				<div className="categoriesContainer">
+					{loadingCaterogies && <Loader />}
+					{errorCategories && <h3>{errorItems}</h3>}
+					<Slider>
+					{
+						categories.map((category) => (
+							<div className="categoryContainer">
+								<p key={category.id} className='categoryName'>{category.name}</p>
+							</div>
+						))
+					}
+					</Slider>
+				</div>
+				<Input
+					cntClassName={inputClass}
+					placeholder='Buscar producto...'
+					labelName='Producto'
+					id='fullName'
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					active={active}
+				/>
+				<ContainerTitle title='Productos' />
+				<div className='itemContainer'>
+					{loadingItems && <Loader />}
+					{errorItems && <h3>{errorItems}</h3>}
+					{search.length > 0 && productsFiltered.length === 0 && <h2>Not found</h2>}
+					{search.length > 0
+						? productsFiltered.map((items) => (
+								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} />
+						))
+						: items.map((items) => (
+								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} />
+						))}
+				</div>
 			</div>
 		</>
 	);

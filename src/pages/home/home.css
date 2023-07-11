@@ -29,3 +29,15 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+.categoryContainer {
+    /* width: 200px; */
+    height: fit-content;
+    background-color: red;
+    padding: 0.8rem;
+    /* margin: 10px */
+}
+
+.categoryName {
+    width: 200px;
+}
