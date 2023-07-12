@@ -20,7 +20,7 @@
 }
 
 .itemCardImage {
-    width: 200px;
+    width: 250px;
     height: 200px;
     object-fit: cover;
 }
@@ -49,9 +49,10 @@
 
 .itemCardDescription {
     font-size: 0.9rem;
-    min-height: 4rem;
+    height: 2rem;
     max-width: 300px;
     text-align: center;
+    overflow: hidden;
 }
 
 .itemCardPrice {

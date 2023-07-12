@@ -2,32 +2,32 @@
     overflow: hidden;
     position: relative;
 }
-.sliderContent{
+
+.sliderContent {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    /* justify-content: center; */
-    /* align-items: center ; */
+    margin: 0px 50px;
 }
 
 .previousBtn,
 .nextBtn {
     border: none;
-    background-color: aqua;
+    background-color: #502f4c;
+    color: #f9f4f5;
     width: 2rem;
     height: 2rem;
     position: absolute;
-    top: 0.4rem;
+    top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0.5rem;
-    
 }
 
-.previousBtn{
+.previousBtn {
     left: 0;
 }
 

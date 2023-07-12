@@ -31,13 +31,22 @@ ul {
 }
 
 .categoryContainer {
-    /* width: 200px; */
     height: fit-content;
-    background-color: red;
+    background-color: #c8b8db;
     padding: 0.8rem;
-    /* margin: 10px */
+    margin: 10px 0px;
+    border-radius: 1rem;
+    border: none;
+}
+
+.categoryContainer:hover {
+    background-color: #502f4c;
+    color: #f9f4f5;
 }
 
 .categoryName {
     width: 200px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }

@@ -10,6 +10,7 @@ function App() {
 			<Routes>
 				<Route path='/react-project/' element={<Home />} />
 				<Route path='/react-project/item/:itemId' element={<ItemDetail />} />
+				<Route path='/react-project/category/:itemCategory' element={<Home />} />
 			</Routes>
 		</div>
 	);
