@@ -12,7 +12,7 @@ const NavBar = () => {
 			<nav className='navbar'>
 				<ul className='menu'>
 					<li>
-						<a href='/'>Productos</a>
+						<a href='/react-project/'>Productos</a>
 					</li>
 					<li>
 						<a href='#'>Contactos</a>
