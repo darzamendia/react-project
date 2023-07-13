@@ -6,7 +6,6 @@
 }
 
 body {
-    /* background-color: #DAD1E1; */
     background-color: #f9f4f5;
 }
 
@@ -30,17 +29,30 @@ ul {
     align-items: center;
 }
 
-.categoryContainer {
+.categoryContainer,
+.categoryContainerAll {
     height: fit-content;
-    background-color: #c8b8db;
     padding: 0.8rem;
     margin: 10px 0px;
     border-radius: 1rem;
     border: none;
 }
 
+.categoryContainer {
+    background-color: #c8b8db;
+}
+
 .categoryContainer:hover {
     background-color: #502f4c;
+    color: #f9f4f5;
+}
+
+.categoryContainerAll {
+    background-color: #35B2A8;
+}
+
+.categoryContainerAll:hover {
+    background-color: #29847D;
     color: #f9f4f5;
 }
 

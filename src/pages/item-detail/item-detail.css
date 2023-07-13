@@ -5,3 +5,17 @@
     justify-content: center;
     align-items: center;
 }
+
+.itemDetailContainer {
+    padding: 1rem 2rem;
+}
+
+.backHomeBtn {
+    height: fit-content;
+    padding: 0.8rem;
+    margin: 10px 0px;
+    border-radius: 1rem;
+    border: none;
+    background-color: #35B2A8;
+    width: 150px;
+}

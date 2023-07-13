@@ -7,7 +7,7 @@ const Header = ({ logo }) => {
 	return (
 		<>
 			<header className='header container-fluid'>
-				<a href='#' className='logo'>
+				<a href='/' className='logo'>
 					{logo}
 				</a>
 				<NavBar />

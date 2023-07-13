@@ -49,8 +49,8 @@ function Home() {
 					{errorCategories && <h3>{errorItems}</h3>}
 					<Slider>
 						{isFiltered && (
-							<button onClick={onResetCategory} className='categoryContainer'>
-								<p className='categoryName'>All</p>
+							<button onClick={onResetCategory} className='categoryContainerAll'>
+								<p className='categoryName'>All switches</p>
 							</button>
 						)}
 						{categories.map((category) => (
