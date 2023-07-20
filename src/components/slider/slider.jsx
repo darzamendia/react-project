@@ -7,8 +7,6 @@ const Slider = ({ children }) => {
 	const startX = useRef(null);
 	const scrollLeft = useRef(null);
 
-	console.log(sliderContentRef.current);
-
 	const onHandleClickNext = () => {
 		sliderContentRef.current.scrollLeft += sliderContentRef?.current?.children[0].offsetWidth;
 	};

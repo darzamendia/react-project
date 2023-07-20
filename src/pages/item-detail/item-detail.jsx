@@ -12,7 +12,6 @@ function ItemDetail() {
 	const navigate = useNavigate();
 	const { itemId } = useParams();
 	const urlId = `${API_URL.PRODUCTS.url}/${itemId}`;
-	console.log(urlId);
 	const { data, loading, error } = useFetch(urlId, API_URL.PRODUCTS.config);
 
 	const onBack = () => {

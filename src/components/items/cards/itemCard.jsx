@@ -2,9 +2,9 @@ import './itemCard.css';
 
 const ItemCard = ({ id, name, image, category, description, price, stock, onAddToCart, onShowItemDetail }) => {
 	return (
-		<div className='itemCard' onClick={() => onShowItemDetail(id)}>
-			<img className='itemCardImage' src={image} alt={name} />
-			<div className='itemCardContent'>
+		<div className='itemCard'>
+			<div className='itemCardContent' onClick={() => onShowItemDetail(id)}>
+				<img className='itemCardImage' src={image} alt={name} />
 				<h3 className='itemCardName'>{name}</h3>
 				<p className='itemCardCategory'>{category}</p>
 				<p className='itemCardDescription'>{description}</p>

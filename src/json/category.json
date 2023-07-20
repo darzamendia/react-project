@@ -1,0 +1,34 @@
+[
+	{
+		"name": "MX-Linear",
+		"id": "2"
+	},
+	{
+		"name": "MX-Tactile",
+		"id": "3"
+	},
+	{
+		"name": "MX-Clicky",
+		"id": "4"
+	},
+	{
+		"name": "MX-Silent",
+		"id": "5"
+	},
+	{
+		"name": "Opto-Linear",
+		"id": "6"
+	},
+	{
+		"name": "Opto-Tactile",
+		"id": "7"
+	},
+	{
+		"name": "Opto-Clicky",
+		"id": "8"
+	},
+	{
+		"name": "Opto-Silent",
+		"id": "9"
+	}
+]

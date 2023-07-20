@@ -2,28 +2,41 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
+import { JSON_PATHS } from '../../constants/constants';
 import { ROOT_URL } from '../../constants/constants';
 import ItemCard from '../../components/items/cards/itemCard';
 import ContainerTitle from '../../components/containerTitle/containerTitle';
 import Loader from '../../components/loader/loader';
 import Slider from '../../components/slider/slider';
 import './home.css';
-
+import './itemCartCard.css';
 function Home() {
 	const navigate = useNavigate();
 	const [itemsFiltered, setItemsFiltered] = useState([]);
 	const [isFiltered, setIsFiltered] = useState(false);
+	const [cart, setCart] = useState([]);
 
-	const {
-		data: items,
-		loading: loadingItems,
-		error: errorItems,
-	} = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
-	const {
-		data: categories,
-		loading: loadingCaterogies,
-		error: errorCategories,
-	} = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
+	// const {
+	// 	data: items,
+	// 	loading: loadingItems,
+	// 	error: errorItems,
+	// } = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
+
+	// const {
+	// 	data: categories,
+	// 	loading: loadingCaterogies,
+	// 	error: errorCategories,
+	// } = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
+
+	const { data: items, loading: loadingItems, error: errorItems } = useFetch(JSON_PATHS.MARKET.url);
+	const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(JSON_PATHS.CATEGORIES.url);
+
+	// const { data: marketAux, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
+	// const {
+	// 	data: categoriesAux,
+	// 	loading: loadingCateroriesAux,
+	// 	error: errorCategoriesAux,
+	// } = useFetch(JSON_PATHS.CATEGORIES.url);
 
 	const onShowItemDetail = (id) => {
 		navigate(`${ROOT_URL}/item/${id}`);
@@ -42,9 +55,70 @@ function Home() {
 		setItemsFiltered([]);
 	};
 
+	const onAddToCart = (id) => {
+		const item = items.find((item) => item.id === id);
+
+		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
+
+		if (cart?.length === 0) {
+			// console.log('Carrito vacio, se agrega item');
+			setCart([{ ...item, quantity: 1 }]);
+		}
+		if (cart?.length > 0 && !cart?.find((item) => item.id === id)) {
+			// console.log('Carrito con items, se agrega item nuevo');
+			setCart([...cart, { ...item, quantity: 1 }]);
+		}
+		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
+			setCart((currentCart) => {
+				return currentCart.map((item) => {
+					// console.log('Item existente, se agrega nueva cantidad');
+					if (item.id === id) {
+						return { ...item, quantity: item.quantity + 1 };
+					} else {
+						return item;
+					}
+				});
+			});
+		}
+	};
+
+	// console.log(marketAux);
+	// console.log(categoriesAux);
 	return (
 		<>
 			<div className='mainContainer'>
+				<div>
+					<h2>Carrito</h2>
+					{cart.length === 0 && <h3>Empty</h3>}
+					{cart?.length > 0 &&
+						cart.map((cartItem) => (
+							<div key={cartItem.name}>
+								{/* {`- Producto: ${cartItem.name} - Cantidad: ${cartItem.quantity}`} */}
+								<div className='itemCartCard'>
+									<img className='itemCartCardImage' src={cartItem.image} alt={cartItem.name} />
+									<div className='itemCartCardContent'>
+										<h3 className='itemCartCardName'>{cartItem.name}</h3>
+										<p className='itemCartCardCategory'>{cartItem.category}</p>
+										{/* <p className='itemCartCardDescription'>{cartItem.description}</p> */}
+										<p className='itemCartCardPrice'>${cartItem.price}</p>
+									</div>
+									<div className='itemCartCardActions'>
+										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
+											-
+										</button>
+										<p className='itemCartCardStock'>{cartItem.quantity}</p>
+										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
+											+
+										</button>
+										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
+											X Eliminar
+										</button>
+									</div>
+								</div>
+							</div>
+						))}
+				</div>
+
 				<div className='categoriesContainer'>
 					{errorCategories && <h3>{errorItems}</h3>}
 					<Slider>
@@ -54,7 +128,7 @@ function Home() {
 							</button>
 						)}
 						{categories.map((category) => (
-							<button onClick={() => onFilter(category.name)} className='categoryContainer'>
+							<button key={category.name} onClick={() => onFilter(category.name)} className='categoryContainer'>
 								<p key={category.id} className='categoryName'>
 									{category.name}
 								</p>
@@ -68,8 +142,12 @@ function Home() {
 					{errorItems && <h3>{errorItems}</h3>}
 					{isFiltered && itemsFiltered.length === 0 && <h2>Not found</h2>}
 					{isFiltered
-						? itemsFiltered.map((items) => <ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} />)
-						: items.map((items) => <ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} />)}
+						? itemsFiltered.map((items) => (
+								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
+						  ))
+						: items.map((items) => (
+								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
+						  ))}
 				</div>
 			</div>
 		</>
