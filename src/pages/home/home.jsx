@@ -16,20 +16,20 @@ function Home() {
 	const [isFiltered, setIsFiltered] = useState(false);
 	const [cart, setCart] = useState([]);
 
-	// const {
-	// 	data: items,
-	// 	loading: loadingItems,
-	// 	error: errorItems,
-	// } = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
+	const {
+		data: items,
+		loading: loadingItems,
+		error: errorItems,
+	} = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
 
-	// const {
-	// 	data: categories,
-	// 	loading: loadingCaterogies,
-	// 	error: errorCategories,
-	// } = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
+	const {
+		data: categories,
+		loading: loadingCaterogies,
+		error: errorCategories,
+	} = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
 
-	const { data: items, loading: loadingItems, error: errorItems } = useFetch(JSON_PATHS.MARKET.url);
-	const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(JSON_PATHS.CATEGORIES.url);
+	// const { data: items, loading: loadingItems, error: errorItems } = useFetch(JSON_PATHS.MARKET.url);
+	// const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(JSON_PATHS.CATEGORIES.url);
 
 	// const { data: marketAux, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
 	// const {
