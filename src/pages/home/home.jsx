@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
-import { JSON_PATHS } from '../../constants/constants';
+// import { JSON_PATHS } from '../../constants/constants';
 import { ROOT_URL } from '../../constants/constants';
 import ItemCard from '../../components/items/cards/itemCard';
 import ContainerTitle from '../../components/containerTitle/containerTitle';
@@ -57,21 +57,16 @@ function Home() {
 
 	const onAddToCart = (id) => {
 		const item = items.find((item) => item.id === id);
-
 		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
-
 		if (cart?.length === 0) {
-			// console.log('Carrito vacio, se agrega item');
 			setCart([{ ...item, quantity: 1 }]);
 		}
 		if (cart?.length > 0 && !cart?.find((item) => item.id === id)) {
-			// console.log('Carrito con items, se agrega item nuevo');
 			setCart([...cart, { ...item, quantity: 1 }]);
 		}
 		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
 			setCart((currentCart) => {
 				return currentCart.map((item) => {
-					// console.log('Item existente, se agrega nueva cantidad');
 					if (item.id === id) {
 						return { ...item, quantity: item.quantity + 1 };
 					} else {
@@ -82,8 +77,51 @@ function Home() {
 		}
 	};
 
-	// console.log(marketAux);
-	// console.log(categoriesAux);
+	const onAddQuantity = (id) => {
+		const item = items.find((item) => item.id === id);
+		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
+		if (cart?.length === 0) {
+			setCart([{ ...item, quantity: 1 }]);
+		}
+		if (cart?.length > 0 && !cart?.find((item) => item.id === id)) {
+			setCart([...cart, { ...item, quantity: 1 }]);
+		}
+		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
+			setCart((currentCart) => {
+				return currentCart.map((item) => {
+					if (item.id === id) {
+						return { ...item, quantity: item.quantity + 1 };
+					} else {
+						return item;
+					}
+				});
+			});
+		}
+	};
+
+	const onReduceQuantity = (id) => {
+		if (cart?.find((item) => item.id === id)?.quantity === 1) return;
+		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
+			setCart((currentCart) => {
+				return currentCart.map((item) => {
+					if (item.id === id) {
+						return { ...item, quantity: item.quantity - 1 };
+					} else {
+						return item;
+					}
+				});
+			});
+		}
+	};
+
+	const onRemoveItem = (id) => {
+		setCart((currentCart) => {
+			return currentCart.filter((item) => item.id !== id);
+		});
+	};
+
+	const sumTotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 	return (
 		<>
 			<div className='mainContainer'>
@@ -93,32 +131,29 @@ function Home() {
 					{cart?.length > 0 &&
 						cart.map((cartItem) => (
 							<div key={cartItem.name}>
-								{/* {`- Producto: ${cartItem.name} - Cantidad: ${cartItem.quantity}`} */}
 								<div className='itemCartCard'>
 									<img className='itemCartCardImage' src={cartItem.image} alt={cartItem.name} />
 									<div className='itemCartCardContent'>
 										<h3 className='itemCartCardName'>{cartItem.name}</h3>
-										<p className='itemCartCardCategory'>{cartItem.category}</p>
-										{/* <p className='itemCartCardDescription'>{cartItem.description}</p> */}
 										<p className='itemCartCardPrice'>${cartItem.price}</p>
 									</div>
 									<div className='itemCartCardActions'>
-										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
+										<button onClick={() => onReduceQuantity(cartItem.id)} className='itemCartCardButton'>
 											-
 										</button>
 										<p className='itemCartCardStock'>{cartItem.quantity}</p>
-										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
+										<button onClick={() => onAddQuantity(cartItem.id)} className='CartBtnDecrease'>
 											+
 										</button>
-										<button onClick={() => onAddToCart(id)} className='itemCartCardButton'>
-											X Eliminar
+										<button onClick={() => onRemoveItem(cartItem.id)} className='CartBtnRemove'>
+											X
 										</button>
 									</div>
 								</div>
 							</div>
 						))}
 				</div>
-
+				{cart?.length > 0 && <p className='subtotalCartPrice'>Total: ${sumTotalCart}</p>}
 				<div className='categoriesContainer'>
 					{errorCategories && <h3>{errorItems}</h3>}
 					<Slider>
