@@ -1,0 +1,19 @@
+.LogoContainer{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.mainPageLogo{
+    height: 300px;
+    width: 300px;
+}
+
+.logoTitle {
+    display: inline-block;
+    color: #171123;;
+    font-size: 5rem;
+    margin: 10px;
+    /* font-weight: bold; */
+    font-family: 'Bagel Fat One', cursive;
+}

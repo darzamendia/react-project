@@ -2,14 +2,15 @@
 import React from 'react';
 import './header.css';
 import NavBar from '../navbar/navbar.jsx';
+import { Link } from "react-router-dom";
 
 const Header = ({ logo }) => {
 	return (
 		<>
 			<header className='header container-fluid'>
-				<a href='/react-project/' className='logo'>
-					{logo}
-				</a>
+				<Link to='/react-project/' className='logo'>
+					{logo}	
+				</Link>
 				<NavBar />
 			</header>
 		</>

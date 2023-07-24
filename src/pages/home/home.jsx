@@ -8,6 +8,7 @@ import ItemCard from '../../components/items/cards/itemCard';
 import ContainerTitle from '../../components/containerTitle/containerTitle';
 import Loader from '../../components/loader/loader';
 import Slider from '../../components/slider/slider';
+import InitialLogo from '../../components/initialLogo/initialLogo';
 import './home.css';
 import './itemCartCard.css';
 import { CartContext } from '../../context/cart-context';
@@ -16,7 +17,6 @@ function Home() {
 	const navigate = useNavigate();
 	const [itemsFiltered, setItemsFiltered] = useState([]);
 	const [isFiltered, setIsFiltered] = useState(false);
-	// const [cart, setCart] = useState([]);
 
 	const { setMarket, market: marketContext, onAddToCart, cart } = useContext(CartContext);
 
@@ -64,75 +64,40 @@ function Home() {
 		setIsFiltered(false);
 		setItemsFiltered([]);
 	};
-
-	// const sumTotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-	console.log({ marketContext, cart });
-
+	
 	return (
-		<>
-			<div className='mainContainer'>
-				{/* <div>
-					<h2>Carrito</h2>
-					{cart.length === 0 && <h3>Empty</h3>}
-					{cart?.length > 0 &&
-						cart.map((cartItem) => (
-							<div key={cartItem.name}>
-								<div className='itemCartCard'>
-									<img className='itemCartCardImage' src={cartItem.image} alt={cartItem.name} />
-									<div className='itemCartCardContent'>
-										<h3 className='itemCartCardName'>{cartItem.name}</h3>
-										<p className='itemCartCardPrice'>${cartItem.price}</p>
-									</div>
-									<div className='itemCartCardActions'>
-										<button onClick={() => onReduceQuantity(cartItem.id)} className='itemCartCardButton'>
-											-
-										</button>
-										<p className='itemCartCardStock'>{cartItem.quantity}</p>
-										<button onClick={() => onAddQuantity(cartItem.id)} className='CartBtnDecrease'>
-											+
-										</button>
-										<button onClick={() => onRemoveItem(cartItem.id)} className='CartBtnRemove'>
-											X
-										</button>
-									</div>
-								</div>
-							</div>
-						))}
-				</div> */}
-				{/* {cart?.length > 0 && <p className='subtotalCartPrice'>Total: ${sumTotalCart}</p>} */}
-				<div className='categoriesContainer'>
-					{errorCategories && <h3>{errorMarket}</h3>}
-					<Slider>
-						{isFiltered && (
-							<button onClick={onResetCategory} className='categoryContainerAll'>
-								<p className='categoryName'>All switches</p>
-							</button>
-						)}
-						{categories.map((category) => (
-							<button key={category.name} onClick={() => onFilter(category.name)} className='categoryContainer'>
-								<p key={category.id} className='categoryName'>
-									{category.name}
-								</p>
-							</button>
-						))}
-					</Slider>
-				</div>
-				<ContainerTitle title='Productos' />
-				<div className='itemContainer'>
-					{loadingMarket && <Loader />}
-					{errorMarket && <h3>{errorMarket}</h3>}
-					{isFiltered && itemsFiltered.length === 0 && <h2>Not found</h2>}
-					{isFiltered
-						? itemsFiltered.map((items) => (
-								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
-						  ))
-						: market.map((items) => (
-								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
-						  ))}
-				</div>
+		<div className='mainContainer'>
+			<InitialLogo>test</InitialLogo>
+			<div className='categoriesContainer'>
+				{errorCategories && <h3>{errorMarket}</h3>}
+				<Slider>
+					{isFiltered && (
+						<button onClick={onResetCategory} className='categoryContainerAll'>
+							<p className='categoryName'>All switches</p>
+						</button>
+					)}
+					{categories.map((category) => (
+						<button key={category.name} onClick={() => onFilter(category.name)} className='categoryContainer'>
+							<p key={category.id} className='categoryName'>
+								{category.name}
+							</p>
+						</button>
+					))}
+				</Slider>
 			</div>
-		</>
+			<ContainerTitle title='Productos' />
+			<div className='itemContainer'>
+				{loadingMarket && <Loader />}
+				{errorMarket && <h3>{errorMarket}</h3>}
+				{isFiltered && itemsFiltered.length === 0 && <h2>Not found</h2>}
+				{isFiltered	
+					? itemsFiltered.map((items) => (
+						<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />))
+					: market.map((items) => (
+						<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} /> ))
+					}
+			</div>
+		</div>
 	);
 }
 

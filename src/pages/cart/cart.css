@@ -1,0 +1,28 @@
+.cartContainer {
+    padding: 1rem 2rem;
+}
+
+.cartActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    width: 900px;
+}
+
+.subtotalCartPrice {
+    font-size: 2rem;
+}
+.checkOutBtn {
+    border: none;
+    color: #f9f4f5;
+    background-color: #502f4c;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    padding: .5rem 1.5rem;
+}
+
+.checkOutBtn:hover {
+    background-color: #0E814B;
+}

@@ -12,8 +12,8 @@ const initialState = {
 	onAddQuantity: () => {},
 	onReduceQuantity: () => {},
 	onRemoveItem: () => {},
+	getTotalItemQuantity: () => {},
 	subtotalCart: 0,
-	// total,
 };
 
 export const CartContext = createContext(initialState);
@@ -46,7 +46,7 @@ export const CartProvider = ({ children }) => {
 	};
 
 	const onAddQuantity = (id) => {
-		const item = items.find((item) => item.id === id);
+		const item = market.find((item) => item.id === id);
 		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
 		if (cart?.length === 0) {
 			setCart([{ ...item, quantity: 1 }]);
@@ -92,6 +92,8 @@ export const CartProvider = ({ children }) => {
 		return cart.find((item) => item.id === id)?.quantity || 0;
 	};
 
+	const getTotalItemQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+
 	const subtotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 	return (
@@ -109,6 +111,8 @@ export const CartProvider = ({ children }) => {
 				setCategories,
 				onAddToCart,
 				getItemQuantity,
+				getTotalItemQuantity,
+				subtotalCart,
 			}}>
 			{children}
 		</CartContext.Provider>
