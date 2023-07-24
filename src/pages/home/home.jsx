@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
@@ -10,16 +10,20 @@ import Loader from '../../components/loader/loader';
 import Slider from '../../components/slider/slider';
 import './home.css';
 import './itemCartCard.css';
+import { CartContext } from '../../context/cart-context';
+
 function Home() {
 	const navigate = useNavigate();
 	const [itemsFiltered, setItemsFiltered] = useState([]);
 	const [isFiltered, setIsFiltered] = useState(false);
-	const [cart, setCart] = useState([]);
+	// const [cart, setCart] = useState([]);
+
+	const { setMarket, market: marketContext, onAddToCart, cart } = useContext(CartContext);
 
 	const {
-		data: items,
-		loading: loadingItems,
-		error: errorItems,
+		data: market,
+		loading: loadingMarket,
+		error: errorMarket,
 	} = useFetch(API_URL.PRODUCTS.url, API_URL.PRODUCTS.config);
 
 	const {
@@ -28,7 +32,13 @@ function Home() {
 		error: errorCategories,
 	} = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
 
-	// const { data: items, loading: loadingItems, error: errorItems } = useFetch(JSON_PATHS.MARKET.url);
+	useEffect(() => {
+		if (market?.length > 0) {
+			setMarket(market);
+		}
+	}, [market, setMarket]);
+
+	// const { data: items, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
 	// const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(JSON_PATHS.CATEGORIES.url);
 
 	// const { data: marketAux, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
@@ -45,7 +55,7 @@ function Home() {
 	const onFilter = (name) => {
 		navigate(`${ROOT_URL}/category/${name}`);
 		setIsFiltered(true);
-		const itemByCategory = items.filter((item) => item.category === name);
+		const itemByCategory = market.filter((item) => item.category === name);
 		setItemsFiltered(itemByCategory);
 	};
 
@@ -55,77 +65,14 @@ function Home() {
 		setItemsFiltered([]);
 	};
 
-	const onAddToCart = (id) => {
-		const item = items.find((item) => item.id === id);
-		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
-		if (cart?.length === 0) {
-			setCart([{ ...item, quantity: 1 }]);
-		}
-		if (cart?.length > 0 && !cart?.find((item) => item.id === id)) {
-			setCart([...cart, { ...item, quantity: 1 }]);
-		}
-		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
-			setCart((currentCart) => {
-				return currentCart.map((item) => {
-					if (item.id === id) {
-						return { ...item, quantity: item.quantity + 1 };
-					} else {
-						return item;
-					}
-				});
-			});
-		}
-	};
+	// const sumTotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-	const onAddQuantity = (id) => {
-		const item = items.find((item) => item.id === id);
-		if (cart?.find((item) => item.id === id)?.quantity === Number(item.stock)) return;
-		if (cart?.length === 0) {
-			setCart([{ ...item, quantity: 1 }]);
-		}
-		if (cart?.length > 0 && !cart?.find((item) => item.id === id)) {
-			setCart([...cart, { ...item, quantity: 1 }]);
-		}
-		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
-			setCart((currentCart) => {
-				return currentCart.map((item) => {
-					if (item.id === id) {
-						return { ...item, quantity: item.quantity + 1 };
-					} else {
-						return item;
-					}
-				});
-			});
-		}
-	};
-
-	const onReduceQuantity = (id) => {
-		if (cart?.find((item) => item.id === id)?.quantity === 1) return;
-		if (cart?.length > 0 && cart?.find((item) => item.id === id)) {
-			setCart((currentCart) => {
-				return currentCart.map((item) => {
-					if (item.id === id) {
-						return { ...item, quantity: item.quantity - 1 };
-					} else {
-						return item;
-					}
-				});
-			});
-		}
-	};
-
-	const onRemoveItem = (id) => {
-		setCart((currentCart) => {
-			return currentCart.filter((item) => item.id !== id);
-		});
-	};
-
-	const sumTotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+	console.log({ marketContext, cart });
 
 	return (
 		<>
 			<div className='mainContainer'>
-				<div>
+				{/* <div>
 					<h2>Carrito</h2>
 					{cart.length === 0 && <h3>Empty</h3>}
 					{cart?.length > 0 &&
@@ -152,10 +99,10 @@ function Home() {
 								</div>
 							</div>
 						))}
-				</div>
-				{cart?.length > 0 && <p className='subtotalCartPrice'>Total: ${sumTotalCart}</p>}
+				</div> */}
+				{/* {cart?.length > 0 && <p className='subtotalCartPrice'>Total: ${sumTotalCart}</p>} */}
 				<div className='categoriesContainer'>
-					{errorCategories && <h3>{errorItems}</h3>}
+					{errorCategories && <h3>{errorMarket}</h3>}
 					<Slider>
 						{isFiltered && (
 							<button onClick={onResetCategory} className='categoryContainerAll'>
@@ -173,14 +120,14 @@ function Home() {
 				</div>
 				<ContainerTitle title='Productos' />
 				<div className='itemContainer'>
-					{loadingItems && <Loader />}
-					{errorItems && <h3>{errorItems}</h3>}
+					{loadingMarket && <Loader />}
+					{errorMarket && <h3>{errorMarket}</h3>}
 					{isFiltered && itemsFiltered.length === 0 && <h2>Not found</h2>}
 					{isFiltered
 						? itemsFiltered.map((items) => (
 								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
 						  ))
-						: items.map((items) => (
+						: market.map((items) => (
 								<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
 						  ))}
 				</div>
