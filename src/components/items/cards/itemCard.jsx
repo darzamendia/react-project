@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import './itemCard.css';
 
-const ItemCard = ({ id, name, image, category, description, price, stock, onAddToCart, onShowItemDetail }) => {
+const ItemCard = memo(({ id, name, image, category, description, price, stock, onAddToCart, onShowItemDetail }) => {
 	return (
 		<div className='itemCard'>
 			<div className='itemCardContent' onClick={() => onShowItemDetail(id)}>
@@ -18,6 +19,6 @@ const ItemCard = ({ id, name, image, category, description, price, stock, onAddT
 			</div>
 		</div>
 	);
-};
+});
 
 export default ItemCard;

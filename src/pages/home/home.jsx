@@ -64,12 +64,12 @@ function Home() {
 		setIsFiltered(false);
 		setItemsFiltered([]);
 	};
-	
+
 	return (
 		<div className='mainContainer'>
-			<InitialLogo>test</InitialLogo>
+			<InitialLogo />
 			<div className='categoriesContainer'>
-				{errorCategories && <h3>{errorMarket}</h3>}
+				{errorCategories ? <h3>{errorMarket}</h3> : null}
 				<Slider>
 					{isFiltered && (
 						<button onClick={onResetCategory} className='categoryContainerAll'>
@@ -87,15 +87,16 @@ function Home() {
 			</div>
 			<ContainerTitle title='Productos' />
 			<div className='itemContainer'>
-				{loadingMarket && <Loader />}
-				{errorMarket && <h3>{errorMarket}</h3>}
+				{loadingMarket ? <Loader /> : null}
+				{errorMarket ? <h3>{errorMarket}</h3> : null}
 				{isFiltered && itemsFiltered.length === 0 && <h2>Not found</h2>}
-				{isFiltered	
+				{isFiltered
 					? itemsFiltered.map((items) => (
-						<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />))
+							<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
+					  ))
 					: market.map((items) => (
-						<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} /> ))
-					}
+							<ItemCard key={items.id} {...items} onShowItemDetail={onShowItemDetail} onAddToCart={onAddToCart} />
+					  ))}
 			</div>
 		</div>
 	);

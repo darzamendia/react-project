@@ -112,7 +112,6 @@ export const CartProvider = ({ children }) => {
 				onAddToCart,
 				getItemQuantity,
 				getTotalItemQuantity,
-				subtotalCart,
 			}}>
 			{children}
 		</CartContext.Provider>

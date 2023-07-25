@@ -24,8 +24,8 @@ function ItemDetail() {
 				Volver a home
 			</button>
 			<ContainerTitle title='Detalle del producto' />
-			{loading && <Loader />}
-			{error && <h3>{error}</h3>}
+			{loading ? <Loader /> : null}
+			{error ? <h3>{error}</h3> : null}
 			<div className='itemContainer'>
 				<ItemDetailCard {...data} />
 			</div>
