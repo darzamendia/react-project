@@ -14,15 +14,17 @@
 .subtotalCartPrice {
     font-size: 2rem;
 }
-.checkOutBtn {
+
+.checkoutBtn {
     border: none;
     color: #f9f4f5;
     background-color: #502f4c;
     font-size: 0.8rem;
     border-radius: 4px;
     padding: .5rem 1.5rem;
+    transition: 0.3s all ease-in-out;
 }
 
-.checkOutBtn:hover {
+.checkoutBtn:hover {
     background-color: #0E814B;
 }

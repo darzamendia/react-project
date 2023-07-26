@@ -1,8 +1,14 @@
 import './cart.css';
 import { useContext } from 'react';
 import { CartContext } from '../../context/cart-context';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
+	const navigate = useNavigate();
+	const onBtnCheckout = () => {
+		navigate('/react-project/checkout');
+	};
+
 	const { cart, onAddQuantity, onReduceQuantity, onRemoveItem, subtotalCart, getTotalItemQuantity } =
 		useContext(CartContext);
 	return (
@@ -39,7 +45,9 @@ function Cart() {
 					<div className='cartActions'>
 						<p className='subtotalCartPrice'>Total: ${subtotalCart}</p>
 						<p className='totalItemQuantity'>Quantity: {getTotalItemQuantity}</p>
-						<button className='checkOutBtn'>Checkout</button>
+						<button onClick={onBtnCheckout} className='checkoutBtn'>
+							Checkout
+						</button>
 					</div>
 				) : null}
 			</div>

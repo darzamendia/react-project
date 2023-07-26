@@ -1,30 +1,39 @@
+/* eslint-disable react/prop-types */
 import './input.css';
 
 const Input = ({
-	id,
 	placeholder,
 	type = 'text',
+	id,
 	required = false,
-	labelName,
+	label,
+	name,
 	onFocus,
-	onChange,
 	onBlur,
+	onChange,
 	value,
-	cntClassName,
+	active,
+	error,
+	hasError,
 }) => {
+	const inputClass = `container ${active ? 'active' : ''}`;
 	return (
-		<div className={cntClassName}>
+		<div className={inputClass}>
 			<input
 				id={id}
+				name={name}
 				type={type}
 				placeholder={placeholder}
 				required={required}
 				onFocus={onFocus}
-				onChange={onChange}
 				onBlur={onBlur}
+				onChange={onChange}
 				value={value}
 			/>
-			<label htmlFor={id}>{labelName}</label>
+			<label className='inputLabel' htmlFor={id}>
+				{label}
+			</label>
+			{hasError && <span className='error'>{error}</span>}
 		</div>
 	);
 };
