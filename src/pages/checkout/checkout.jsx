@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
-import Input from '../../components/input/input';
-import './checkout.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
+import { useQuery } from '../../hooks/useQuery';
 import { CartContext } from '../../context/cart-context';
 // import { firebaseServices } from '../../services/firebase';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useQuery } from '../../hooks/useQuery';
+import Input from '../../components/input/input';
+import './checkout.css';
 
 const initialState = {
 	name: { value: '', error: '', hasError: true, active: false, name: 'name' },
