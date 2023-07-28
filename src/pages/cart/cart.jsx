@@ -2,15 +2,33 @@ import './cart.css';
 import { useContext } from 'react';
 import { CartContext } from '../../context/cart-context';
 import { useNavigate } from 'react-router-dom';
+import { firebaseServices } from '../../services/firebase/firebase';
 
 function Cart() {
 	const navigate = useNavigate();
-	const onBtnCheckout = () => {
-		navigate('/react-project/checkout');
-	};
-
 	const { cart, onAddQuantity, onReduceQuantity, onRemoveItem, subtotalCart, getTotalItemQuantity } =
 		useContext(CartContext);
+
+	const onHandlerCreateCart = async () => {
+		const newCart = {
+			buyer: {
+				id: 1,
+			},
+			items: cart,
+			createdAt: new Date(),
+			total: subtotalCart,
+			status: 'pending',
+		};
+
+		const cartId = await firebaseServices.createCart(newCart);
+		return cartId;
+	};
+
+	const onBtnCheckout = async () => {
+		const cartId = await onHandlerCreateCart();
+		navigate('/react-project/checkout', { state: { cartId: cartId.id } });
+	};
+
 	return (
 		<div className='cartContainer'>
 			<div>
@@ -23,6 +41,7 @@ function Cart() {
 									<img className='itemCartCardImage' src={cartItem.image} alt={cartItem.name} />
 									<div className='itemCartCardContent'>
 										<h3 className='itemCartCardName'>{cartItem.name}</h3>
+										{/* <p className='itemCartCardPrice'>Stock {cartItem.quantity}</p> */}
 										<p className='itemCartCardPrice'>${cartItem.price}</p>
 									</div>
 									<div className='itemCartCardActions'>

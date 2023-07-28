@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useQuery } from '../../hooks/useQuery';
 import { CartContext } from '../../context/cart-context';
-// import { firebaseServices } from '../../services/firebase';
+import { firebaseServices } from '../../services/firebase/firebase';
 import Input from '../../components/input/input';
 import './checkout.css';
 
@@ -19,8 +19,9 @@ const initialState = {
 };
 
 function Checkout() {
-	const { cart, total, setCart } = useContext(CartContext);
+	const { cart, subtotalCart, setCart } = useContext(CartContext);
 	const [formState, inputHandler, inputFocus, inputBlur, clearInputs] = useForm(initialState);
+	const [orderCreated, setOrderCreated] = useState(null);
 	const { state } = useLocation();
 	const navigate = useNavigate();
 	let query = useQuery();
@@ -85,11 +86,11 @@ function Checkout() {
 				trackingNumber: '123456ff227aa89',
 				type: 'DELIVERY',
 			},
-			total: total,
+			total: subtotalCart,
 		};
 
 		const orderId = await firebaseServices.createOrder(newOrder);
-		await firebaseServices.updateCart(state.cartId);
+		await firebaseServices.updateCart(state?.cartId);
 
 		return {
 			orderId,
@@ -99,8 +100,8 @@ function Checkout() {
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		const { orderId } = await onHandlerOrder();
-		clearInputs({ formState });
-		navigate('/success-order', { state: { orderId: orderId.id } });
+		// clearInputs({ formState });
+		// navigate('/success-order', { state: { orderId: orderId.id } });
 	};
 
 	return (
