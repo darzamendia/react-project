@@ -6,6 +6,7 @@ import ItemDetail from './pages/item-detail/item-detail';
 import Cart from './pages/cart/cart';
 import Checkout from './pages/checkout/checkout';
 import { CartProvider } from './context/cart-context';
+import SuccessOrder from './pages/successOrder/successOrder';
 function App() {
 	return (
 		<div>
@@ -17,6 +18,7 @@ function App() {
 					<Route path='/react-project/category/:itemCategory' element={<Home />} />
 					<Route path='/react-project/cart' element={<Cart />} />
 					<Route path='/react-project/checkout' element={<Checkout />} />
+					<Route path='/react-project/successOrder' element={<SuccessOrder />} />
 				</Routes>
 			</CartProvider>
 		</div>

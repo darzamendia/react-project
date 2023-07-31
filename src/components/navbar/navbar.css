@@ -1,7 +1,7 @@
 .menu {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .menu a {
@@ -10,6 +10,7 @@
     color: #dad1e1;
     transition: all 0.3s ease-in-out;
     z-index: 2;
+    padding: 1rem
 }
 
 .menu a:hover {
@@ -22,7 +23,7 @@
 }
 
 .side-menu:checked~nav {
-    max-height: 40%;
+    max-height: 30%;
 }
 
 .side-menu:checked~.hamburger {
@@ -62,8 +63,20 @@
 }
 
 .menu-cart-container:hover {
-    background-color: #35B2A8;;
+    background-color: #35B2A8;
+    ;
 }
+
 .nav-cart-count {
     font-size: .9rem;
+}
+
+.navbar {
+    top: 7%;
+}
+
+@media (min-width: 768px) {
+    .side-menu:checked~nav {
+        max-height: 100%;
+    }
 }

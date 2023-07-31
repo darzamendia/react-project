@@ -28,7 +28,6 @@ function Checkout() {
 
 	useEffect(() => {
 		const cartId = query.get('cartId');
-
 		if (query.get('cartId')) {
 			const getCart = async () => {
 				const cart = await firebaseServices.getCartById(cartId);
@@ -100,8 +99,8 @@ function Checkout() {
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		const { orderId } = await onHandlerOrder();
-		// clearInputs({ formState });
-		// navigate('/success-order', { state: { orderId: orderId.id } });
+		clearInputs({ formState });
+		navigate('/react-project/successOrder', { state: { orderId: orderId.id } });
 	};
 
 	return (

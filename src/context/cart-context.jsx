@@ -91,7 +91,6 @@ export const CartProvider = ({ children }) => {
 	const getItemQuantity = (id) => {
 		return cart.find((item) => item.id === id)?.quantity || 0;
 	};
-
 	const getTotalItemQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
 	const subtotalCart = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
