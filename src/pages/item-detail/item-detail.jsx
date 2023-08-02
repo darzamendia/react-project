@@ -7,12 +7,15 @@ import './item-detail.css';
 import Loader from '../../components/loader/loader';
 import { useNavigate } from 'react-router';
 import { ROOT_URL } from '../../constants/constants';
+import { useContext } from 'react';
+import { CartContext } from '../../context/cart-context';
 
 function ItemDetail() {
 	const navigate = useNavigate();
 	const { itemId } = useParams();
 	const urlId = `${API_URL.PRODUCTS.url}/${itemId}`;
 	const { data, loading, error } = useFetch(urlId, API_URL.PRODUCTS.config);
+	const { onAddToCart } = useContext(CartContext);
 
 	const onBack = () => {
 		navigate(`${ROOT_URL}`);
@@ -27,7 +30,7 @@ function ItemDetail() {
 			{loading ? <Loader /> : null}
 			{error ? <h3>{error}</h3> : null}
 			<div className='itemContainer'>
-				<ItemDetailCard {...data} />
+				<ItemDetailCard {...data} onAddToCart={onAddToCart} />
 			</div>
 		</div>
 	);
