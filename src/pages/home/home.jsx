@@ -4,7 +4,6 @@ import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
 import { ROOT_URL } from '../../constants/constants';
 import { CartContext } from '../../context/cart-context';
-// import { JSON_PATHS } from '../../constants/constants';
 import Input from '../../components/input/input';
 import ItemCard from '../../components/items/cards/itemCard';
 import ContainerTitle from '../../components/containerTitle/containerTitle';
@@ -102,6 +101,7 @@ function Home() {
 					)}
 					{categories.map((category) => (
 						<Categories
+							key={category.name}
 							categoryName={category.name}
 							onSelectCategory={() => onFilter(category.name)}
 							type='button'
