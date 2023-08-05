@@ -19,6 +19,15 @@ import { initializeApp } from 'firebase/app';
 // 	appId: import.meta.env.VITE_APP_APP_ID,
 // };
 
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js';
+
+// If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js';
+
+// Add Firebase products that you want to use
+import { getAuth } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js';
+
 const firebaseConfig = {
 	apiKey: 'AIzaSyCFrrl7Q1zHa4nra0TQye1nqTaY0cQney0',
 	authDomain: 'project-coderhouse-40fe9.firebaseapp.com',
