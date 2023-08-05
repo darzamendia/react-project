@@ -1,0 +1,34 @@
+.categoryContainer,
+.categoryContainerAll {
+    height: fit-content;
+    padding: 0.8rem;
+    margin: 10px 0px;
+    border-radius: 1rem;
+    border: none;
+    transition: 0.3s all ease-in-out;
+}
+
+.categoryContainer {
+    background-color: #c8b8db;
+}
+
+.categoryContainer:hover {
+    background-color: #502f4c;
+    color: #f9f4f5;
+}
+
+.categoryContainerAll {
+    background-color: #35B2A8;
+}
+
+.categoryContainerAll:hover {
+    background-color: #29847D;
+    color: #f9f4f5;
+}
+
+.categoryName {
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

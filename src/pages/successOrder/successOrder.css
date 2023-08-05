@@ -1,0 +1,85 @@
+.successOrderContainer {
+    width: 90%;
+    margin: 2rem 5%;
+    box-shadow: 0 2px 3px #C8D0D8;
+    /* padding: 2rem 4rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.successOrderTitle {
+    display: flex;
+    justify-content: center;
+    color: #42C2B7;
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.successOrderContent {
+    color: #404F5E;
+    font-size: 1rem;
+    margin: 1rem 2rem;
+}
+
+.successLogo {
+    width: 50%;
+    padding: 1rem;
+}
+
+.successOrderCode {
+    margin: 2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #29847D
+}
+
+.successAction {
+    display: flex;
+    justify-content: center;
+}
+
+.successBackHomeBtn {
+    /* display: ; */
+    /* height: fit-content; */
+    padding: 0.8rem;
+    margin: 10px 0px;
+    border-radius: 1rem;
+    border: none;
+    background-color: #35B2A8;
+    width: 150px;
+
+}
+
+@media screen and (min-width: 1024px) {
+    .successOrderContainer {
+        width: 60%;
+        margin: 2rem 20%;
+    }
+
+    .successLogo {
+        width: 30%;
+        padding: 1rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-device-width: 1024px) {
+    .successOrderContainer {
+        width: 80%;
+        margin: 2rem 10%;
+    }
+
+    .successLogo {
+        width: 30%;
+        padding: 1rem;
+    }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 768px) {}
+
+@media only screen and (max-device-width: 480px) {
+    /* STYLES HERE */
+}

@@ -2,21 +2,24 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { API_URL } from '../../constants/constants';
-// import { JSON_PATHS } from '../../constants/constants';
 import { ROOT_URL } from '../../constants/constants';
+import { CartContext } from '../../context/cart-context';
+// import { JSON_PATHS } from '../../constants/constants';
+import Input from '../../components/input/input';
 import ItemCard from '../../components/items/cards/itemCard';
 import ContainerTitle from '../../components/containerTitle/containerTitle';
 import Loader from '../../components/loader/loader';
 import Slider from '../../components/slider/slider';
 import InitialLogo from '../../components/initialLogo/initialLogo';
+import Categories from '../../components/categories/categories';
 import './home.css';
-import './itemCartCard.css';
-import { CartContext } from '../../context/cart-context';
 
 function Home() {
 	const navigate = useNavigate();
-	const [itemsFiltered, setItemsFiltered] = useState([]);
+	const [active, setActive] = useState(false);
 	const [isFiltered, setIsFiltered] = useState(false);
+	const [itemsFiltered, setItemsFiltered] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState('All');
 
 	const { setMarket, market: marketContext, onAddToCart, cart } = useContext(CartContext);
 
@@ -32,21 +35,38 @@ function Home() {
 		error: errorCategories,
 	} = useFetch(API_URL.CATEGORIES.url, API_URL.CATEGORIES.config);
 
+	const filterBySearch = (query) => {
+		if (selectedCategory !== 'All switches' && query.length === 0) {
+			onFilter(selectedCategory);
+			return;
+		}
+		let updateProductList = query.length === 0 ? [...products] : [...itemsFiltered];
+
+		updateProductList = updateProductList.filter((item) => {
+			return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+		});
+
+		setItemsFiltered(updateProductList);
+	};
+
+	const onChange = (event) => {
+		const value = event.target.value;
+		filterBySearch(value);
+	};
+
+	const onFocus = () => {
+		setActive(true);
+	};
+
+	const onBlur = () => {
+		setActive(false);
+	};
+
 	useEffect(() => {
 		if (market?.length > 0) {
 			setMarket(market);
 		}
 	}, [market, setMarket]);
-
-	// const { data: items, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
-	// const { data: categories, loading: loadingCaterogies, error: errorCategories } = useFetch(JSON_PATHS.CATEGORIES.url);
-
-	// const { data: marketAux, loading: loadingMarket, error: errorMarket } = useFetch(JSON_PATHS.MARKET.url);
-	// const {
-	// 	data: categoriesAux,
-	// 	loading: loadingCateroriesAux,
-	// 	error: errorCategoriesAux,
-	// } = useFetch(JSON_PATHS.CATEGORIES.url);
 
 	const onShowItemDetail = (id) => {
 		navigate(`${ROOT_URL}/item/${id}`);
@@ -57,6 +77,7 @@ function Home() {
 		setIsFiltered(true);
 		const itemByCategory = market.filter((item) => item.category === name);
 		setItemsFiltered(itemByCategory);
+		setSelectedCategory(name);
 	};
 
 	const onResetCategory = () => {
@@ -72,18 +93,39 @@ function Home() {
 				{errorCategories ? <h3>{errorMarket}</h3> : null}
 				<Slider>
 					{isFiltered && (
-						<button onClick={onResetCategory} className='categoryContainerAll'>
-							<p className='categoryName'>All switches</p>
-						</button>
+						<Categories
+							categoryName='All switches'
+							onSelectCategory={onResetCategory}
+							type='button'
+							className='categoryContainerAll'
+						/>
 					)}
 					{categories.map((category) => (
-						<button key={category.name} onClick={() => onFilter(category.name)} className='categoryContainer'>
-							<p key={category.id} className='categoryName'>
-								{category.name}
-							</p>
-						</button>
+						<Categories
+							categoryName={category.name}
+							onSelectCategory={() => onFilter(category.name)}
+							type='button'
+							className='categoryContainer'
+						/>
 					))}
 				</Slider>
+			</div>
+			<div className='inputContainer'>
+				{isFiltered ? (
+					<>
+						<Input
+							placeholder='find a product'
+							id='task'
+							name='Search'
+							required={true}
+							label='Search'
+							onChange={onChange}
+							onFocus={onFocus}
+							onBlur={onBlur}
+							active={active}
+						/>
+					</>
+				) : null}
 			</div>
 			<ContainerTitle title='Productos' />
 			<div className='itemContainer'>

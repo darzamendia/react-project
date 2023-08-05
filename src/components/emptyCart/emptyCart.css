@@ -1,0 +1,26 @@
+.emptyCartContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyCartLogo {
+    width: 100%;
+}
+
+.emptyCartTitle {
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 769px) {
+    .emptyCartLogo {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-device-width: 1024px) {
+    .emptyCartLogo {
+        width: 60%;
+    }
+}

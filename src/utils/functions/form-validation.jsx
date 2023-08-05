@@ -55,6 +55,24 @@ export const validateInput = ({ type, value }) => {
 			} else if (!emailRegex.test(formatValue)) {
 				hasError = true;
 				error = '* El correo electrónico ingresado es inválido';
+			} else if (value != email02.value && email02.value !== '') {
+				hasError = true;
+				error = 'Los correos electrónicos deben ser iguales';
+			} else {
+				hasError = false;
+				error = '';
+			}
+			break;
+		case 'email02':
+			if (formatValue === '') {
+				hasError = true;
+				error = '* El correo electrónico es obligatorio';
+			} else if (!emailRegex.test(formatValue)) {
+				hasError = true;
+				error = '* El correo electrónico ingresado es inválido';
+			} else if (value != email.value) {
+				hasError = true;
+				error = 'Los correos electrónicos deben ser iguales';
 			} else {
 				hasError = false;
 				error = '';

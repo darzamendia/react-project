@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart-context';
 import { useNavigate } from 'react-router-dom';
 import { firebaseServices } from '../../services/firebase/firebase';
-
+import EmptyCart from '../../components/emptyCart/emptyCart';
 function Cart() {
 	const navigate = useNavigate();
 	const { cart, onAddQuantity, onReduceQuantity, onRemoveItem, subtotalCart, getTotalItemQuantity } =
@@ -33,7 +33,7 @@ function Cart() {
 		<div className='cartContainer'>
 			<div>
 				<h2>Carrito</h2>
-				{cart.length === 0 ? <h3>Empty</h3> : null}
+				{cart.length === 0 ? <EmptyCart /> : null}
 				{cart?.length > 0
 					? cart.map((cartItem) => (
 							<div key={cartItem.name}>
@@ -41,7 +41,7 @@ function Cart() {
 									<img className='itemCartCardImage' src={cartItem.image} alt={cartItem.name} />
 									<div className='itemCartCardContent'>
 										<h3 className='itemCartCardName'>{cartItem.name}</h3>
-										{/* <p className='itemCartCardPrice'>Stock {cartItem.quantity}</p> */}
+										<p className='itemCartCardPrice'>Stock disponible: {cartItem.quantity}</p>
 										<p className='itemCartCardPrice'>${cartItem.price}</p>
 									</div>
 									<div className='itemCartCardActions'>
@@ -62,8 +62,8 @@ function Cart() {
 					: null}
 				{cart?.length > 0 ? (
 					<div className='cartActions'>
+						<p className='totalItemQuantity'>Cantidad de items: {getTotalItemQuantity}</p>
 						<p className='subtotalCartPrice'>Total: ${subtotalCart}</p>
-						<p className='totalItemQuantity'>Quantity: {getTotalItemQuantity}</p>
 						<button onClick={onBtnCheckout} className='checkoutBtn'>
 							Checkout
 						</button>
